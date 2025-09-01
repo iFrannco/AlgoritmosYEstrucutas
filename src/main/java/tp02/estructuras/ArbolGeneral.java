@@ -59,8 +59,11 @@ public class ArbolGeneral<T> {
         return !this.hijos.esVacia();
     }
 
+    // falso && verdadero -> falso | falso && falso -> falso (cuando el arbol
+    // verdadero && verdadero -> verdadero (cuando el arbol es null, es vacio)
     public boolean esVacio() {
-        return this.dato == null && !this.tieneHijos();
+        // return this.dato == null && !this.tieneHijos();
+        return this.dato == null;
     }
 
 
@@ -73,7 +76,16 @@ public class ArbolGeneral<T> {
     }
 
     public ListaEnlazadaGenerica<T> preOrden() {
-        return null;
+
+        ListaEnlazadaGenerica<T> resultado = new ListaEnlazadaGenerica<>();
+        resultado.agregarFinal(this.dato);
+        while (!this.hijos.fin()) {
+            ListaGenerica<T> subResultado = hijos.proximo().preOrden();
+            for (int i = 1; i <= subResultado.tamanio(); i++) {
+                resultado.agregarFinal(subResultado.elemento(i));
+            }
+        }
+        return resultado;
     }
 
     public Integer altura() {
@@ -151,6 +163,7 @@ public class ArbolGeneral<T> {
                     return resultado;
                 }
             }
+            hijos.comenzar();
         }
         return null;
     }
