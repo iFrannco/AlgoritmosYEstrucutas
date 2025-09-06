@@ -18,7 +18,7 @@ public class Main {
         nodo2.agregarHijoDerecho(nodo5);
 
         nodo3.agregarHijoIzquierdo(nodo6);
-        // nodo3.agregarHijoDerecho(nodo7);
+        nodo3.agregarHijoDerecho(nodo7);
 
         nodo1.imprimirPreOrden();
 
@@ -26,6 +26,8 @@ public class Main {
         ArbolBinario<String> espejado = nodo1.espejo();
         espejado.imprimirPreOrden();
 
+        System.out.println("----------------");
+        nodo1.entreNiveles(1, 2);
 
     }
 }

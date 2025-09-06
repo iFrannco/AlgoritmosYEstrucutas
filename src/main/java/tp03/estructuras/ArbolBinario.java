@@ -1,5 +1,7 @@
 package tp03.estructuras;
 
+import tp01.ejercicio3.ColaGenerica;
+
 public class ArbolBinario<T> {
     private T dato;
     private ArbolBinario<T> hijoIzquierdo;
@@ -122,6 +124,42 @@ public class ArbolBinario<T> {
 
 
     public void entreNiveles(int n, int m) {
+        // encolar la raiz
+        // encolar nivel 0
+        // mientras la cola no este vacia
+        // desencolar nivel actual
+        // desencolar el elemento
+        // si el nivel es menor a cero, retornar
+        // si el nivel es mayor a m, retornar
+        // si el nivel actual esta en el rango, imprimir el valor
+        // si tiene hijo izquierdo encolarlo y encolar nivelAct + 1, si tiene hijo derecho, encolarlo y encolar nivelAct + 1
+
+        ColaGenerica<ArbolBinario<T>> valores = new ColaGenerica<>();
+        ColaGenerica<Integer> niveles = new ColaGenerica<>();
+
+        valores.encolar(this);
+        niveles.encolar(0);
+
+        while (!valores.esVacia()) {
+            ArbolBinario<T> valorActual = valores.desencolar();
+            int nivelActual = niveles.desencolar();
+
+            if (n < 0 || nivelActual > m) {
+                break;
+            }
+            if (nivelActual >= n) {
+                System.out.println(valorActual.dato);
+            }
+
+            if (valorActual.tieneHijoIzquierdo()) {
+                valores.encolar(valorActual.hijoIzquierdo);
+                niveles.encolar(nivelActual + 1);
+            }
+            if (valorActual.tieneHijoDerecho()) {
+                valores.encolar(valorActual.hijoDerecho);
+                niveles.encolar(nivelActual + 1);
+            }
+        }
 
     }
 

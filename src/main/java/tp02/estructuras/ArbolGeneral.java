@@ -59,8 +59,6 @@ public class ArbolGeneral<T> {
         return !this.hijos.esVacia();
     }
 
-    // falso && verdadero -> falso | falso && falso -> falso (cuando el arbol
-    // verdadero && verdadero -> verdadero (cuando el arbol es null, es vacio)
     public boolean esVacio() {
         return this.dato == null && !this.tieneHijos();
     }
