@@ -53,6 +53,6 @@ public class Main {
 
         RedAguaPotable red = new RedAguaPotable(A);
         System.out.println(red.minimoCaudal(1000));
-        
+
     }
 }
