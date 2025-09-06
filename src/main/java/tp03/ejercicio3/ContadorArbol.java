@@ -15,11 +15,11 @@ public class ContadorArbol {
         return recorridoPostOrden(this.arbol);
     }
 
-    private ListaGenerica<Integer> recorridoPreOrden(ArbolBinario<Integer> arbol) {
+    private ListaGenerica<Integer> recorridoInOrden(ArbolBinario<Integer> arbol) {
         ListaGenerica<Integer> resultado = new ListaEnlazadaGenerica<>();
 
         if (arbol.tieneHijoIzquierdo()) {
-            ListaGenerica<Integer> resultadosHijoIzq = recorridoPreOrden(arbol.getHijoIzquierdo());
+            ListaGenerica<Integer> resultadosHijoIzq = recorridoInOrden(arbol.getHijoIzquierdo());
             for (int i = 1; i <= resultadosHijoIzq.tamanio(); i++) {
                 resultado.agregarFinal(resultadosHijoIzq.elemento(i));
             }
@@ -28,7 +28,7 @@ public class ContadorArbol {
             resultado.agregarFinal(arbol.getDato());
         }
         if (arbol.tieneHijoDerecho()) {
-            ListaGenerica<Integer> resultadosHijoDer = recorridoPreOrden(arbol.getHijoDerecho());
+            ListaGenerica<Integer> resultadosHijoDer = recorridoInOrden(arbol.getHijoDerecho());
             for (int i = 1; i <= resultadosHijoDer.tamanio(); i++) {
                 resultado.agregarFinal(resultadosHijoDer.elemento(i));
             }
@@ -41,13 +41,13 @@ public class ContadorArbol {
         ListaGenerica<Integer> resultado = new ListaEnlazadaGenerica<>();
 
         if (arbol.tieneHijoIzquierdo()) {
-            ListaGenerica<Integer> resultadosHijoIzq = recorridoPreOrden(arbol.getHijoIzquierdo());
+            ListaGenerica<Integer> resultadosHijoIzq = recorridoPostOrden(arbol.getHijoIzquierdo());
             for (int i = 1; i <= resultadosHijoIzq.tamanio(); i++) {
                 resultado.agregarFinal(resultadosHijoIzq.elemento(i));
             }
         }
         if (arbol.tieneHijoDerecho()) {
-            ListaGenerica<Integer> resultadosHijoDer = recorridoPreOrden(arbol.getHijoDerecho());
+            ListaGenerica<Integer> resultadosHijoDer = recorridoPostOrden(arbol.getHijoDerecho());
             for (int i = 1; i <= resultadosHijoDer.tamanio(); i++) {
                 resultado.agregarFinal(resultadosHijoDer.elemento(i));
             }
