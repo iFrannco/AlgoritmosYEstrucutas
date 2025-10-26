@@ -2,6 +2,7 @@ package tp06;
 
 import tp01.ejercicio2.estructuras.ListaEnlazadaGenerica;
 import tp01.ejercicio2.estructuras.ListaGenerica;
+import tp01.ejercicio3.ColaGenerica;
 import tp06.estructuras.Arista;
 import tp06.estructuras.Grafo;
 import tp06.estructuras.Vertice;
@@ -48,6 +49,47 @@ public class Recorridos<T> {
 
 
     public ListaGenerica<T> bfs(Grafo<T> grafo) {
-        return null;
+        // por cada uno de los nodos
+        // si no fue visitado
+        // encolarlo
+        // mientras la cola este vacia
+        // recorrer sus adyacentes
+        // si estos no fueron procesados
+        // añadirlos a la cola
+
+        ListaGenerica<T> resultado = new ListaEnlazadaGenerica<>();
+
+        if (!grafo.esVacio()) {
+            ColaGenerica<Vertice<T>> cola = new ColaGenerica<>();
+            ListaGenerica<Vertice<T>> visitados = new ListaEnlazadaGenerica<>();
+            ListaGenerica<Vertice<T>> vertices = grafo.listaDeVertices();
+            vertices.comenzar();
+
+            while (!vertices.fin()) {
+                Vertice<T> verticePadre = vertices.proximo();
+                if (!visitados.incluye(verticePadre)) {
+                    cola.encolar(verticePadre);
+                    visitados.agregarFinal(verticePadre);
+                    resultado.agregarFinal(verticePadre.dato());
+
+                    while (!cola.esVacia()) {
+                        Vertice<T> verticeActual = cola.desencolar();
+                        ListaGenerica<Arista<T>> adyacentes = grafo.listaDeAdyacentes(verticeActual);
+                        adyacentes.comenzar();
+                        while (!adyacentes.fin()) {
+                            Vertice<T> adyacenteTemp = adyacentes.proximo().verticeDestino();
+                            if (!visitados.incluye(adyacenteTemp)) {
+                                cola.encolar(adyacenteTemp);
+                                visitados.agregarFinal(adyacenteTemp);
+                                resultado.agregarFinal(adyacenteTemp.dato());
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+        return resultado;
     }
 }

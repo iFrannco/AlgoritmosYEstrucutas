@@ -13,15 +13,18 @@ public class Main {
         VerticeImplMatrizAdy<String> v2 = new VerticeImplMatrizAdy<>("2");
         VerticeImplMatrizAdy<String> v3 = new VerticeImplMatrizAdy<>("3");
         VerticeImplMatrizAdy<String> v4 = new VerticeImplMatrizAdy<>("4");
+        VerticeImplMatrizAdy<String> v5 = new VerticeImplMatrizAdy<>("5");
 
         miGrafo.agregarVertice(v0);
         miGrafo.agregarVertice(v1);
         miGrafo.agregarVertice(v2);
         miGrafo.agregarVertice(v3);
         miGrafo.agregarVertice(v4);
+        miGrafo.agregarVertice(v5);
 
         miGrafo.conectar(v0, v1);
         miGrafo.conectar(v0, v2);
+        miGrafo.conectar(v0, v5);
         miGrafo.conectar(v2, v3);
         miGrafo.conectar(v3, v1);
         miGrafo.conectar(v1, v4);
