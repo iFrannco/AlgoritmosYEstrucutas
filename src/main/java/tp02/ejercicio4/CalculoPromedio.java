@@ -58,7 +58,7 @@ public class CalculoPromedio {
                 // por cada elemento en la lista, sumarlo al contador
                 listaValores.comenzar();
                 while (!listaValores.fin()) {
-                    acumulador = +listaValores.proximo();
+                    acumulador += listaValores.proximo();
                 }
 
                 // si el promedio de este nivel es mayor al promedio encontrado, intercambiarlo
