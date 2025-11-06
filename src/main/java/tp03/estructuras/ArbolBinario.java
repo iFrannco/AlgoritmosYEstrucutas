@@ -103,23 +103,19 @@ public class ArbolBinario<T> {
 
     public ArbolBinario<T> espejo() {
         ArbolBinario<T> resultado = new ArbolBinario<>();
-        espejar(resultado, this);
-        return resultado;
 
-    }
-
-    private void espejar(ArbolBinario<T> resultado, ArbolBinario<T> arbolOriginal) {
-        if (!arbolOriginal.esVacio()) {
-            resultado.setDato(arbolOriginal.getDato());
-            if (arbolOriginal.tieneHijoIzquierdo()) {
-                resultado.agregarHijoDerecho(new ArbolBinario<>());
-                espejar(resultado.getHijoDerecho(), arbolOriginal.getHijoIzquierdo());
+        if (!this.esVacio()) {
+            resultado.setDato(this.getDato());
+            if (this.tieneHijoIzquierdo()) {
+                resultado.agregarHijoDerecho(this.getHijoIzquierdo().espejo());
             }
-            if (arbolOriginal.tieneHijoDerecho()) {
-                resultado.agregarHijoIzquierdo(new ArbolBinario<>());
-                espejar(resultado.getHijoIzquierdo(), arbolOriginal.getHijoDerecho());
+            if (this.tieneHijoDerecho()) {
+                resultado.agregarHijoIzquierdo(this.getHijoDerecho().espejo());
             }
         }
+
+        return resultado;
+
     }
 
 
