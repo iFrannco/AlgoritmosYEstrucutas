@@ -83,20 +83,21 @@ public class ArbolBinario<T> {
     }
 
     public int contarHojas() {
-        if (!esVacio()) {
-            int cantHijos = 0;
-            if (esHoja()) {
+        if (!this.esVacio()) {
+            if (this.esHoja()) {
                 return 1;
-            } else {
-                if (tieneHijoIzquierdo()) {
-                    cantHijos += hijoIzquierdo.contarHojas();
-                }
-                if (tieneHijoDerecho()) {
-                    cantHijos += hijoDerecho.contarHojas();
-                }
-                return cantHijos;
             }
+            int cantHojas = 0;
+            if (this.tieneHijoIzquierdo()) {
+                cantHojas += this.getHijoIzquierdo().contarHojas();
+            }
+            if (this.tieneHijoDerecho()) {
+                cantHojas += this.getHijoDerecho().contarHojas();
+            }
+
+            return cantHojas;
         }
+
         return 0;
     }
 
