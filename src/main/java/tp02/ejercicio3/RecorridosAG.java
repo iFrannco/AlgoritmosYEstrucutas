@@ -16,41 +16,50 @@ public class RecorridosAG {
                 resultado.agregarFinal(a.getDato());
             }
             ListaGenerica<ArbolGeneral<Integer>> hijos = a.getHijos();
+            hijos.comenzar();
             while (!hijos.fin()) {
-                ListaGenerica<Integer> numeros = numerosImparesMayoresQuePreOrden(hijos.proximo(), n);
-                for (int i = 1; i <= numeros.tamanio(); i++) {
-                    resultado.agregarFinal(numeros.elemento(i));
+                ListaGenerica<Integer> extras = numerosImparesMayoresQuePreOrden(
+                        hijos.proximo(), n);
+                extras.comenzar();
+                while (!extras.fin()) {
+                    resultado.agregarFinal(extras.proximo());
                 }
             }
-            hijos.comenzar();
         }
+
         return resultado;
     }
 
     public ListaGenerica<Integer> numerosImparesMayoresQueInOrden
             (ArbolGeneral<Integer> a, Integer n) {
-        if (a.esVacio()) return null;
         ListaGenerica<Integer> resultado = new ListaEnlazadaGenerica<>();
-        ListaGenerica<ArbolGeneral<Integer>> hijos = a.getHijos();
 
-        if (!hijos.fin()) {
-            ListaGenerica<Integer> numeros = numerosImparesMayoresQueInOrden(hijos.proximo(), n);
-            for (int i = 1; i <= numeros.tamanio(); i++) {
-                resultado.agregarFinal(numeros.elemento(i));
+        if (!a.esVacio()) {
+            ListaGenerica<ArbolGeneral<Integer>> hijos = a.getHijos();
+            hijos.comenzar();
+            if (!hijos.esVacia()) {
+                ListaGenerica<Integer> resHijoIzq = numerosImparesMayoresQueInOrden(
+                        hijos.proximo(), n);
+                resHijoIzq.comenzar();
+                while (!resHijoIzq.fin()) {
+                    resultado.agregarFinal(resHijoIzq.proximo());
+                }
+
             }
-        }
-
-        if (!(a.getDato() % 2 == 0) && a.getDato() > n) {
-            resultado.agregarFinal(a.getDato());
-        }
-
-        while (!hijos.fin()) {
-            ListaGenerica<Integer> numeros2 = numerosImparesMayoresQueInOrden(hijos.proximo(), n);
-            for (int i = 1; i <= numeros2.tamanio(); i++) {
-                resultado.agregarFinal(numeros2.elemento(i));
+            if (!(a.getDato() % 2 == 0) && a.getDato() > n) {
+                resultado.agregarFinal(a.getDato());
             }
+            while (!hijos.fin()) {
+                ListaGenerica<Integer> resHijosDer = numerosImparesMayoresQueInOrden(
+                        hijos.proximo(), n);
+                resHijosDer.comenzar();
+                while (!resHijosDer.fin()) {
+                    resultado.agregarFinal(resHijosDer.proximo());
+                }
+            }
+
         }
-        hijos.comenzar();
+
         return resultado;
     }
 
@@ -60,50 +69,43 @@ public class RecorridosAG {
 
         if (!a.esVacio()) {
             ListaGenerica<ArbolGeneral<Integer>> hijos = a.getHijos();
+            hijos.comenzar();
             while (!hijos.fin()) {
-                ListaGenerica<Integer> numeros = numerosImparesMayoresQuePostOrden(hijos.proximo(), n);
-                for (int i = 1; i <= numeros.tamanio(); i++) {
-                    resultado.agregarFinal(numeros.elemento(i));
+                ListaGenerica<Integer> extras = numerosImparesMayoresQuePostOrden(
+                        hijos.proximo(), n);
+                extras.comenzar();
+                while (!extras.fin()) {
+                    resultado.agregarFinal(extras.proximo());
                 }
             }
             if (!(a.getDato() % 2 == 0) && a.getDato() > n) {
                 resultado.agregarFinal(a.getDato());
             }
-            hijos.comenzar();
         }
+
         return resultado;
     }
 
     public ListaGenerica<Integer> numerosImparesMayoresQuePorNiveles
             (ArbolGeneral<Integer> a, Integer n) {
 
-        if (a.esVacio()) {
-            return null;
-        }
-
-        ColaGenerica<ArbolGeneral<Integer>> cola = new ColaGenerica<>();
-        ColaGenerica<Integer> niveles = new ColaGenerica<>();
         ListaGenerica<Integer> resultado = new ListaEnlazadaGenerica<>();
 
-        cola.encolar(a);
-        niveles.encolar(0); // raíz en nivel 0
-
-        while (!cola.esVacia()) {
-            ArbolGeneral<Integer> actual = cola.desencolar();
-            int nivelActual = niveles.desencolar();
-
-            if (!(actual.getDato() % 2 == 0) && actual.getDato() > n) {
-                resultado.agregarFinal(actual.getDato());
+        if (!a.esVacio()) {
+            ColaGenerica<ArbolGeneral<Integer>> cola = new ColaGenerica<>();
+            cola.encolar(a);
+            while (!cola.esVacia()) {
+                ArbolGeneral<Integer> elemento = cola.desencolar();
+                if (!(elemento.getDato() % 2 == 0) && elemento.getDato() > n) {
+                    resultado.agregarFinal(elemento.getDato());
+                }
+                ListaGenerica<ArbolGeneral<Integer>> hijos = elemento.getHijos();
+                hijos.comenzar();
+                while (!hijos.fin()) {
+                    cola.encolar(hijos.proximo());
+                }
             }
-
-            ListaGenerica<ArbolGeneral<Integer>> hijos = actual.getHijos();
-            while (!hijos.fin()) {
-                cola.encolar(hijos.proximo());
-                niveles.encolar(nivelActual + 1);
-            }
-            hijos.comenzar();
         }
-
         return resultado;
 
     }
