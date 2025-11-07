@@ -9,25 +9,26 @@ public class RecorridosAG {
 
     public ListaGenerica<Integer> numerosImparesMayoresQuePreOrden
             (ArbolGeneral<Integer> a, Integer n) {
-        ListaGenerica<Integer> resultado = new ListaEnlazadaGenerica<>();
 
-        if (!a.esVacio()) {
-            if (!(a.getDato() % 2 == 0) && a.getDato() > n) {
-                resultado.agregarFinal(a.getDato());
-            }
-            ListaGenerica<ArbolGeneral<Integer>> hijos = a.getHijos();
-            hijos.comenzar();
-            while (!hijos.fin()) {
-                ListaGenerica<Integer> extras = numerosImparesMayoresQuePreOrden(
-                        hijos.proximo(), n);
-                extras.comenzar();
-                while (!extras.fin()) {
-                    resultado.agregarFinal(extras.proximo());
-                }
-            }
-        }
+        ListaGenerica<Integer> resultado = new ListaEnlazadaGenerica<>();
+        recorrerPreOrdenYAgregarALista(a, n, resultado);
 
         return resultado;
+    }
+
+    private void recorrerPreOrdenYAgregarALista(ArbolGeneral<Integer> arbol, int n,
+                                                ListaGenerica<Integer> resultado) {
+
+        if (!arbol.esVacio()) {
+            if (!(arbol.getDato() % 2 == 0) && arbol.getDato() > n) {
+                resultado.agregarFinal(arbol.getDato());
+            }
+            ListaGenerica<ArbolGeneral<Integer>> hijos = arbol.getHijos();
+            hijos.comenzar();
+            while (!hijos.fin()) {
+                recorrerPreOrdenYAgregarALista(hijos.proximo(), n, resultado);
+            }
+        }
     }
 
     public ListaGenerica<Integer> numerosImparesMayoresQueInOrden
