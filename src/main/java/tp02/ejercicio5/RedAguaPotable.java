@@ -10,25 +10,27 @@ public class RedAguaPotable {
         this.redDeCaños = redDeCaños;
     }
 
+
     public double minimoCaudal(double caudal) {
         return calcularMinimo(redDeCaños, caudal);
-
     }
 
-    public double calcularMinimo(ArbolGeneral<String> arbol, double caudal) {
-        if (!arbol.tieneHijos()) {
+    private double calcularMinimo(ArbolGeneral<String> arbol, double caudal) {
+        if (arbol.esHoja()) {
             return caudal;
         }
-        double minCaudal = caudal;
         ListaGenerica<ArbolGeneral<String>> hijos = arbol.getHijos();
+        hijos.comenzar();
+        double minActual = caudal;
         while (!hijos.fin()) {
-            double minActual = calcularMinimo(hijos.proximo(), caudal / arbol.getHijos().tamanio());
-            if (minActual < minCaudal) {
-                minCaudal = minActual;
+            double min = calcularMinimo(hijos.proximo(), caudal / hijos.tamanio());
+            if (min < minActual) {
+                minActual = min;
             }
         }
-        hijos.comenzar();
-        return minCaudal;
+
+        return minActual;
+
     }
 
 }
