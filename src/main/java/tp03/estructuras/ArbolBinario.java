@@ -103,10 +103,9 @@ public class ArbolBinario<T> {
 
 
     public ArbolBinario<T> espejo() {
-        ArbolBinario<T> resultado = new ArbolBinario<>();
+        ArbolBinario<T> resultado = new ArbolBinario<>(this.getDato());
 
         if (!this.esVacio()) {
-            resultado.setDato(this.getDato());
             if (this.tieneHijoIzquierdo()) {
                 resultado.agregarHijoDerecho(this.getHijoIzquierdo().espejo());
             }
@@ -121,41 +120,39 @@ public class ArbolBinario<T> {
 
 
     public void entreNiveles(int n, int m) {
-        // encolar la raiz
-        // encolar nivel 0
-        // mientras la cola no este vacia
-        // desencolar nivel actual
-        // desencolar el elemento
-        // si el nivel es menor a cero, retornar
-        // si el nivel es mayor a m, retornar
-        // si el nivel actual esta en el rango, imprimir el valor
-        // si tiene hijo izquierdo encolarlo y encolar nivelAct + 1, si tiene hijo derecho, encolarlo y encolar nivelAct + 1
+        if (n > m) {
+            System.out.println("n tiene que ser mayor que m");
+            return;
+        }
+        if (n < 0) {
+            System.out.println("n y m tienen que ser numeros positivos");
+            return;
+        }
 
-        ColaGenerica<ArbolBinario<T>> valores = new ColaGenerica<>();
+        ColaGenerica<ArbolBinario<T>> cola = new ColaGenerica<>();
         ColaGenerica<Integer> niveles = new ColaGenerica<>();
-
-        valores.encolar(this);
+        cola.encolar(this);
         niveles.encolar(0);
 
-        while (!valores.esVacia()) {
-            ArbolBinario<T> valorActual = valores.desencolar();
+        while (!cola.esVacia()) {
+            ArbolBinario<T> actual = cola.desencolar();
             int nivelActual = niveles.desencolar();
 
-            if (n < 0 || nivelActual > m) {
+            if (nivelActual > m) {
                 break;
             }
-            if (nivelActual >= n) {
-                System.out.println(valorActual.dato);
+
+            System.out.println(actual.getDato());
+
+            if (actual.tieneHijoIzquierdo()) {
+                cola.encolar(actual.getHijoIzquierdo());
+                niveles.encolar(nivelActual + 1);
+            }
+            if (actual.tieneHijoDerecho()) {
+                cola.encolar(actual.getHijoDerecho());
+                niveles.encolar(nivelActual + 1);
             }
 
-            if (valorActual.tieneHijoIzquierdo()) {
-                valores.encolar(valorActual.hijoIzquierdo);
-                niveles.encolar(nivelActual + 1);
-            }
-            if (valorActual.tieneHijoDerecho()) {
-                valores.encolar(valorActual.hijoDerecho);
-                niveles.encolar(nivelActual + 1);
-            }
         }
 
     }

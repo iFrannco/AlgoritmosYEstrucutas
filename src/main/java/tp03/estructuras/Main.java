@@ -20,10 +20,12 @@ public class Main {
         nodo3.agregarHijoIzquierdo(nodo6);
         nodo3.agregarHijoDerecho(nodo7);
 
+        System.out.println("arbol original:");
         nodo1.imprimirPreOrden();
 
         System.out.println("cantidad hojas: " + nodo1.contarHojas());
         ArbolBinario<String> espejado = nodo1.espejo();
+        System.out.println("arbol espejado: ");
         espejado.imprimirPreOrden();
 
         System.out.println("----------------");

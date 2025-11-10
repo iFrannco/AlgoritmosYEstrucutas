@@ -11,7 +11,7 @@ public class GrafoImplMatrizAdy<T> implements Grafo<T> {
     private int[][] matrizAdy;
     private ListaGenerica<Vertice<T>> vertices;
     private int maxVertices;
-    private boolean esDirigido;
+    // private boolean esDirigido;
 
     public GrafoImplMatrizAdy(int tamañoMatriz) {
         this.maxVertices = tamañoMatriz;

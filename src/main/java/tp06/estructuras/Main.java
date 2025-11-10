@@ -1,5 +1,6 @@
 package tp06.estructuras;
 
+import Practica.Ejercicio_1;
 import tp01.ejercicio2.estructuras.ListaEnlazadaGenerica;
 import tp01.ejercicio2.estructuras.ListaGenerica;
 import tp06.Recorridos;
@@ -106,6 +107,69 @@ public class Main {
         caminoFinal.comenzar();
         while (!caminoFinal.fin()) {
             System.out.println(caminoFinal.proximo());
+        }
+
+        System.out.println("----------------------------------------");
+        System.out.println();
+        // ----------------------------------------------------------------------
+
+        // Ejercicio 1 practica extra
+
+        Grafo<String> ciudades = new GrafoImplMatrizAdy<>(30);
+
+        VerticeImplMatrizAdy<String> suipacha = new VerticeImplMatrizAdy<>("Suipacha");
+        VerticeImplMatrizAdy<String> carlosKeen = new VerticeImplMatrizAdy<>("Carlos Keen");
+        VerticeImplMatrizAdy<String> moreno = new VerticeImplMatrizAdy<>("Moreno");
+        VerticeImplMatrizAdy<String> quilmes = new VerticeImplMatrizAdy<>("Quilmes");
+        VerticeImplMatrizAdy<String> navarro = new VerticeImplMatrizAdy<>("Navarro");
+        VerticeImplMatrizAdy<String> cañuelas = new VerticeImplMatrizAdy<>("Cañuelas");
+        VerticeImplMatrizAdy<String> abasto = new VerticeImplMatrizAdy<>("Abasto");
+        VerticeImplMatrizAdy<String> laPlata = new VerticeImplMatrizAdy<>("La Plata");
+        VerticeImplMatrizAdy<String> saladillo = new VerticeImplMatrizAdy<>("Saladillo");
+        VerticeImplMatrizAdy<String> lobos = new VerticeImplMatrizAdy<>("Lobos");
+        VerticeImplMatrizAdy<String> pinamar = new VerticeImplMatrizAdy<>("Pinamar");
+
+        ciudades.agregarVertice(suipacha);
+        ciudades.agregarVertice(carlosKeen);
+        ciudades.agregarVertice(moreno);
+        ciudades.agregarVertice(quilmes);
+        ciudades.agregarVertice(navarro);
+        ciudades.agregarVertice(cañuelas);
+        ciudades.agregarVertice(abasto);
+        ciudades.agregarVertice(laPlata);
+        ciudades.agregarVertice(saladillo);
+        ciudades.agregarVertice(lobos);
+        ciudades.agregarVertice(pinamar);
+
+        ciudades.conectar(suipacha, carlosKeen);
+        ciudades.conectar(carlosKeen, moreno);
+        ciudades.conectar(moreno, quilmes);
+        ciudades.conectar(suipacha, navarro);
+        ciudades.conectar(navarro, cañuelas);
+        ciudades.conectar(cañuelas, abasto);
+        ciudades.conectar(abasto, moreno);
+        ciudades.conectar(abasto, laPlata);
+        ciudades.conectar(laPlata, quilmes);
+        ciudades.conectar(saladillo, navarro);
+        ciudades.conectar(lobos, navarro);
+        ciudades.conectar(pinamar, laPlata);
+
+        Ejercicio_1 ejercicio1 = new Ejercicio_1();
+        ListaGenerica<String> caminoPasandoPor = ejercicio1.buscarCamino(ciudades, "Pinamar", "Suipacha", "Navarro");
+
+        caminoPasandoPor.comenzar();
+        while (!caminoPasandoPor.fin()) {
+            System.out.println(caminoPasandoPor.proximo());
+        }
+
+        System.out.println("---------------------------------------------");
+        System.out.println("prueba buscar si existe un camino entre dos puntos, si no existe no devuelve nada");
+
+        borrar b = new borrar();
+        ListaGenerica<String> caminito = b.buscarCamino(ciudades, "Lobos", "Quilmes");
+        caminito.comenzar();
+        while (!caminito.fin()) {
+            System.out.println(caminito.proximo());
         }
 
     }

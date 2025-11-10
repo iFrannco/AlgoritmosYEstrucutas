@@ -72,6 +72,9 @@ public class visitaOslo {
         }
         // quitar de la lista porque recorri sus adyacentes y no es el camino correcto.
         // ademas lo marco como que no forma parte del camino, para usarlo quizas en otro camino distino
+
+        // ACA PODRIA AGREGAR EL CAMINO ACTUAL A UN CAMINO POSIBLE.
+
         camino.eliminarEn(camino.tamanio());
         enCamino[nodoActual.getPosicion()] = false;
         return false;

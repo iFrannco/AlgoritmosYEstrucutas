@@ -31,10 +31,10 @@ public class Main {
         System.out.println("--------------------------");
         System.out.println("recorrido");
 
-        CaminoRecorrido caminoRecorrido = new CaminoRecorrido();
-        ListaGenerica<Integer> resultado = caminoRecorrido.caminoRecorrido(nodo100, 25);
-        for (int i = 1; i <= resultado.tamanio(); i++) {
-            System.out.println(resultado.elemento(i));
+        ListaGenerica<Integer> resultado = nodo100.caminoRecorrido(nodo25);
+        resultado.comenzar();
+        while (!resultado.fin()) {
+            System.out.println(resultado.proximo());
         }
     }
 }
