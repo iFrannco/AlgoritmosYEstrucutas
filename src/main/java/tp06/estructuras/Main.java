@@ -165,12 +165,7 @@ public class Main {
         System.out.println("---------------------------------------------");
         System.out.println("prueba buscar si existe un camino entre dos puntos, si no existe no devuelve nada");
 
-        borrar b = new borrar();
-        ListaGenerica<String> caminito = b.buscarCamino(ciudades, "Lobos", "Quilmes");
-        caminito.comenzar();
-        while (!caminito.fin()) {
-            System.out.println(caminito.proximo());
-        }
+
 
     }
 }
